@@ -2,13 +2,10 @@
 pragma solidity ^0.8.4;
 
 
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-contract JamToken {
+contract StellarToken {
     // Variables públicas
-    string public name = "JamToken";
-    string public symbol = "JAM";
+    string public name = "StellarToken";
+    string public symbol = "ST";
     uint8 public decimals = 18; // Decimales estándar
     uint256 public totalSupply = 10 **24; // Cantidad de tokens que vamos a crear
 
@@ -36,7 +33,7 @@ contract JamToken {
 
 
 
-    function approve(address _spender, uint value) public returns (bool success){
+    function approve(address _spender, uint _value) public returns (bool success){
         allowance[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value);
         return true;
@@ -48,10 +45,10 @@ contract JamToken {
 
 
     // Transferencia de tokens:
-    function transfer(address _to, uint value) public  returns (bool success){
-        require(balanceOf[msg.sender] >= value);
-        balanceOf[msg.sender] -= value;
-        balanceOf[_to] += value;
+    function transfer(address _to, uint _value) public  returns (bool success){
+        require(balanceOf[msg.sender] >= _value);
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
         emit Transfer(msg.sender, _to, _value);
         return true;
     }
@@ -60,7 +57,7 @@ contract JamToken {
 
 
 
-    function TransferFrom(_from, _to, _value) public returns (bool success) {
+    function transferFrom(address _from, address _to, uint _value) public returns (bool success) {
          require(_value <= balanceOf[_from]);
          require(_value <= allowance[_from][msg.sender]);
          balanceOf[_from] -= _value;
